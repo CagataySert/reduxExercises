@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
-import { updateUser } from './actions/user-action';
+import { updateUser, getUsers } from './actions/user-action';
 
 
 class App extends Component {
@@ -14,6 +14,10 @@ class App extends Component {
 
   onUpdateUser() {
     this.props.onUpdateUser('Tarık');
+  }
+
+  componentDidMount() {
+    this.props.onGetUsers();
   }
 
   render() {
@@ -37,7 +41,8 @@ const mapStateToPros = (state, props) => {
 };
 
 const mapDispatchToProps = {
-  onUpdateUser: updateUser
+  onUpdateUser: updateUser,
+  onGetUsers: getUsers
 }
 
 const mergeProps = (propsFromState, propsFromDispatch, ownProps) => {
@@ -46,4 +51,4 @@ const mergeProps = (propsFromState, propsFromDispatch, ownProps) => {
   console.log(ownProps);
   return {};
 }
-export default connect(mapStateToPros, mapDispatchToProps, mergeProps)(App);
+export default connect(mapStateToPros, mapDispatchToProps)(App);
